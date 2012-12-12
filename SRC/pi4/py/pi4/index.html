@@ -1,0 +1,63 @@
+<title>Hython</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#divLogotipo").fadeIn(3000, function(){
+			$("#divTxtPesquisa").fadeIn(2000);
+			$("#divBtnPesquisar").fadeIn(2000);
+		})
+	});
+	
+	$(function() {
+		$('#frmCrawler').submit(function() {
+			if($('#hdnValidacao').val() == '1')
+			{
+				return true;
+			}
+			
+			var site = $('#txtPesquisa').val();
+			$('#hdnTxtPesquisa').val(site);
+
+			$("#divTxtPesquisa").fadeOut(2000);
+			$("#divBtnPesquisar").fadeOut(2000);
+			$("#divLogotipo").fadeOut(2000, function(){
+				$('#hdnValidacao').val('1');
+				$('#frmCrawler').submit();
+			});
+			return false;
+		});
+	});
+	
+	function validar()
+	{
+		var site = $("#txtPesquisa").val();
+		if(site.length > 12)
+		{
+			if(site.substring(0,11) == "http://www." || site.substring(0,12) == "https://www." || site.substring(0,7) == "http://")
+			{
+				return true;
+			}
+			else
+			{
+				alert("O prefixo 'http://www' é necessário.");
+				return false;
+			}
+		}
+		return false;
+	}
+</script>
+<form id="frmCrawler" method="post" action="carregando">
+	<input type="hidden" id="hdnValidacao" name="hdnValidacao" value="0"/>
+	<div style="text-align: center;">
+		<div id="divLogotipo" style="display: none;">
+			<img src="imagens/logo.png" style="height: 186px; width: 475px;">
+		</div>
+		<div id="divTxtPesquisa" style="display: none; margin-top: 15px">
+			<input type="text" id="txtPesquisa" name="txtPesquisa" style="width: 475px">
+		</div>
+		<div id="divBtnPesquisar" style="display: none;">
+			<input type="submit" id="btnPesquisar" name="btnPesquisar" style="width: 150px;" value="Crawlear" onclick="javascript: return validar();">
+		</div>
+	</div>
+</form>

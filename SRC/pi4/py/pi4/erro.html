@@ -1,0 +1,28 @@
+<title>Hython - Erro</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#divLogotipo").fadeIn(3000, function(){
+			$("#divErro").fadeIn(1000, function(){
+				$("#voltar").attr("onclick", "javascript: voltar()");
+			});
+		});
+    });
+    function voltar()
+    {
+		$("#voltar").attr("onclick", "");
+        $("#divLogotipo").fadeOut(2000);
+        $("#divErro").fadeOut(2000, function(){
+			document.location.href='/index';
+        });
+    }
+</script>
+<div style="text-align: center;">
+	<div id="divLogotipo" style="display: none;">
+		<img src="imagens/erro.png" style="height: 186px; width: 475px;">
+	</div>
+	<div id="divErro" style="display: none;">
+		URL inexistente (::site::). Clique <a id="voltar" style="cursor: pointer; color: blue; text-decoration: underline;" onclick="javascript: voltar();">aqui</a> e efetue uma nova pesquisa.
+	</div>
+</div>

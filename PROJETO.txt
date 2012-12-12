@@ -1,0 +1,7 @@
+﻿Web Crawler - Hython
+
+Foi proposto um projeto onde deveriamos desenvolver um web Crawler, que é uma aplicação onde apresenta informações detalhadas sobre um site ao entrar com a URL da página. Assim como estipulado o Web Crawler foi desenvolvido na linguagem Python, para visualização dos dados utilizamos a Linguagem HTML5 e CSS3, as transições de uma página para outra e os efeitos visuais na aplicação foram desenvolvidos através da biblioteca JQuery, da linguagem JavaScript.
+Concluimos então o projeto possibilitando com a interação das linguagens, a visualização dos links internos e externos da URL desejada, imagens e documentos da encontrados na página web.
+
+
+

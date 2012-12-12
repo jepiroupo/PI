@@ -1,0 +1,321 @@
+<title>Hython - Resultado</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="css/crawler.css" rel="stylesheet" type="text/css">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#divLogotipo").fadeIn(1000, function(){
+            $("#divNovoCrawler").fadeIn(1000, function(){
+                $("#divSite").fadeIn(1000, function(){
+                    $("#divInicio").fadeIn(1000, function(){
+                        $("#divTermino").fadeIn(1000, function(){
+							$("#divMetodoClassificacao").fadeIn(1000, function(){
+								$("#divClassificacao").fadeIn(1000, function(){
+									$("#divPalavrasImportantes").fadeIn(1000, function(){
+										$("#divLinksExternos").fadeIn(1000);
+										$("#divLinksInternos").fadeIn(1000);
+										$("#divImagens").fadeIn(1000);
+										$("#divDocumentos").fadeIn(1000, function(){
+											$("#voltar").attr("onclick", "javascript: voltar()");
+										});
+									});
+								});
+							});
+                        });
+                    });
+                });
+            });
+        });
+		
+		$('.imgholder').click(function(e) {
+			e.preventDefault();
+			
+			var id = "#dialog";
+			
+			if($(this).attr('id') == 'divLinksExternos')
+				$('#divDialogLinkExterno').show();
+			else if($(this).attr('id') == 'divLinksInternos')
+				$('#divDialogLinkInternos').show();
+			else if($(this).attr('id') == 'divImagens')	
+				$('#divDialogImagens').show();
+			else if($(this).attr('id') == 'divDocumentos')	
+				$('#divDialogDocumentos').show();
+			
+			var maskHeight = $(document).height();
+			var maskWidth = $(window).width();
+		
+			$('#mask').css({'width':maskWidth,'height':maskHeight});
+
+			$('#mask').fadeIn(1000);	
+			$('#mask').fadeTo("slow",0.8);	
+		
+			//Get the window height and width
+			var winH = $(window).height();
+			var winW = $(window).width();
+				  
+			$(id).css('top',  winH/2-$(id).height()/2);
+			$(id).css('left', winW/2-$(id).width()/2);
+		
+			$(id).fadeIn(2000);
+		});
+		
+		$('.window .close').click(function (e) {
+			e.preventDefault();
+			
+			$('.window').fadeOut(1000);
+			$('#mask').fadeOut(1000);
+			fecharLista();
+			fecharDivCategorias();
+		});		
+		
+		$('#mask').click(function () {
+			$('.window').fadeOut(1000);
+			$(this).fadeOut(1000);
+			fecharLista();
+			fecharDivCategorias();
+		});
+    });
+	
+	
+    function voltar()
+    {
+		$("#voltar").attr("onclick", "");
+		$("#divPalavrasImportantes").fadeOut(1000);
+        $("#divLinkExternos").fadeOut(1000);
+        $("#divLinkInternos").fadeOut(1000);
+		$("#divMetodoClassificacao").fadeOut(1000);
+		$("#divClassificacao").fadeOut(1000);
+		$("#divTermino").fadeOut(1000);
+		$("#divInicio").fadeOut(1000);
+		$("#divSite").fadeOut(1000);
+		$("#divNovoCrawler").fadeOut(1000);
+		$("#divLogotipo").fadeOut(1000);
+		$("#divLinksExternos").fadeOut(1000);
+		$("#divLinksInternos").fadeOut(1000);
+		$("#divImagens").fadeOut(1000);
+		$("#divDocumentos").fadeOut(1000, function(){
+			document.location.href='/index';
+        });
+    }
+	
+	function fecharLista()
+	{
+		$("div").each(function (index, value){
+			var classe = $(this).attr("class");
+			if(typeof classe !== 'undefined')
+			{
+				if (classe.substring(0,5) == "item_")
+				{
+					$(this).hide();
+				}
+			}
+	    });
+	}
+	
+	function abrirLista(obj)
+	{
+		fecharLista();
+	
+		var id = $(obj).attr('id');
+		$('.item_'+id).show();
+	}
+	
+	function fecharDivCategorias()
+	{
+		$('#divDialogLinkExterno').hide();
+		$('#divDialogLinkInternos').hide();
+		$('#divDialogImagens').hide();
+		$('#divDialogDocumentos').hide();
+	}
+	
+	function fecharFotos()
+	{
+		$("img").each(function (index, value){
+			var classe = $(this).attr("class");
+			if(typeof classe !== 'undefined')
+			{
+				if (classe.substring(0,10) == "foto_item_")
+				{
+					$(this).hide();
+				}
+			}
+	    });
+	}
+	
+	function abrirFotos(obj)
+	{
+		fecharFotos();
+	
+		var id = $(obj).attr('id');
+		
+		var parent_height = $('.foto_item_'+id).parent().height();
+		var image_height = $('.foto_item_'+id).height();
+		var top_margin = (parent_height - image_height)/2;
+		$('.foto_item_'+id).css( 'margin-top' , top_margin);
+		
+		$('.foto_item_'+id).show();
+	}
+</script>
+
+<div style="width: 475px; margin: 0 auto 0 auto;">
+	<div id="divLogotipo" style="display: none;">
+		<img src="imagens/logo.png" style="height: 186px; width: 475px;"/>
+	</div>
+	<div id="divNovoCrawler" style="margin-top: 10px; display: none;">
+		<a id="voltar" style="cursor: pointer; color: blue; text-decoration: underline;">Efetuar nova pesquisa</a>
+	</div>
+	<div id="divSite" style="margin-top: 10px; display: none;">
+		<div style="display: inline-block;">
+			<div style="float: left; width: 165px;">Site:&nbsp;</div>
+			<div style="float: left;">::site::</div>
+		</div>
+	</div>
+	<div id="divInicio" style="margin-top: 10px; display: none;">
+		<div style="display: inline-block;">
+			<div style="float: left; width: 165px;">Início:&nbsp;</div>
+			<div style="float: left;">::inicio::</div>
+		</div>
+	</div>
+	<div id="divTermino" style="margin-top: 10px; display: none;">
+		<div style="display: inline-block;">
+			<div style="float: left; width: 165px;">Término:&nbsp;</div>
+			<div style="float: left;">::termino::</div>
+		</div>
+	</div>
+	<div id="divMetodoClassificacao" style="margin-top: 10px; display: none;">
+		<div style="display: inline-block;">
+			<div style="float: left; width: 165px;">M&eacute;todo de classificação:&nbsp;</div>
+			<div style="float: left;">::metodo::</div>
+		</div>
+	</div>
+	<div id="divClassificacao" style="margin-top: 10px; display: none;">
+		<div style="display: inline-block;">
+			<div style="float: left; width: 165px;">Classificação:&nbsp;</div>
+			<div style="float: left;">::classificacao::</div>
+		</div>
+	</div>
+	<div id="divPalavrasImportantes" style="margin-top: 10px; display: none;">
+		<div style="display: inline-block;">
+			<div style="float: left; width: 165px;">Palavras importantes:</div>
+			<div style="float: left;">::palavras_decisivas::</div>
+		</div>
+	</div>
+</div>
+
+<div style="text-align: center; width: 800px; margin: 0 auto 0 auto;">
+	<section id="wrapper">
+		<div class="imgholder" id="divLinksExternos" style="display:none;">
+			<div class="outer1 circle"></div>
+			<div class="outer2 circle"></div>
+			<figure>
+				<a href="#dialog"><img src="imagens/ext.png" /></a>
+				<figcaption class="caption">Links Externos</figcaption>
+			</figure>
+		</div>
+		
+		<div class="imgholder" id="divLinksInternos" style="display:none;">
+			<div class="outer1 circle"></div>
+			<div class="outer2 circle"></div>
+			<figure>
+				<a href="#dialog"><img src="imagens/int.png" /></a>
+				<figcaption class="caption">Links Internos</figcaption>
+			</figure>
+		</div>
+			
+		<div class="imgholder" id="divImagens" style="display:none;">
+			<div class="outer1 circle"></div>
+			<div class="outer2 circle"></div>
+			<figure>
+				<a href="#dialog"><img src="imagens/img.png" /></a>
+				<figcaption class="caption">Imagens</figcaption>
+			</figure>
+		</div>
+			
+		<div class="imgholder" id="divDocumentos" style="display:none;">
+			<div class="outer1 circle"></div>
+			<div class="outer2 circle"></div>
+			<figure>
+				<a href="#dialog"><img src="imagens/pdf.png" /></a>
+				<figcaption class="caption">Documentos</figcaption>
+			</figure>
+		</div>
+	</section>
+</div>
+
+<div id="boxes">
+	<div id="dialog" class="window">
+		<a href="#" class="close" style="color: red;">x</a><br/>
+		
+		<!-- LINKS EXTERNOS -->
+		<div id="divDialogLinkExterno" style="height:492px; position:relative; margin-top:-16px; display:block; display:none;">
+			<div style="height:100%; width:50%; float:left; display:block; overflow:scroll;">
+				<!-- TITULO -->
+				<div style="text-align:center; margin-top: 5px; display:block;"><h3>Categorias</h3></div>
+				<!-- /TITULO -->
+				<!-- CATEGORIAS -->
+				::externos_categorias::
+				<!-- /CATEGORIAS -->
+			</div>
+			<div style="height:100%; width:50%; float:left; overflow:scroll;">
+				<!-- TITULO -->
+				<div style="text-align:center; margin-top: 5px;"><h3>Links Externos</h3></div>
+				<!-- /TITULO -->
+				<!-- LINKS -->
+				::externos_links::
+				<!-- /LINKS -->
+			</div>
+		</div>
+		<!-- /LINKS EXTERNOS -->
+		
+		<!-- LINKS INTERNOS -->
+		<div id="divDialogLinkInternos" style="height:492px; position:relative; margin-top:-16px; display:block; display:none;">
+			<div style="height:100%; width:50%; float:left; display:block; overflow:scroll;">
+				<!-- TITULO -->
+				<div style="text-align:center; margin-top: 5px; display:block;"><h3>Categorias</h3></div>
+				<!-- /TITULO -->
+				<!-- CATEGORIAS -->
+				::internos_categorias::
+				<!-- /CATEGORIAS -->
+			</div>
+			<div style="height:100%; width:50%; float:left; overflow:scroll;">
+				<!-- TITULO -->
+				<div style="text-align:center; margin-top: 5px;"><h3>Links Internos</h3></div>
+				<!-- /TITULO -->
+				<!-- LINKS -->
+				::internos_links::
+				<!-- /LINKS -->
+			</div>
+		</div>
+		<!-- /LINKS EXTERNOS -->
+		
+		<!-- IMAGENS -->
+		<div id="divDialogImagens" style="height:492px; position:relative; margin-top:-16px; display:block; display:none;">
+			<div style="height:100%; width:50%; float:left; display:block; overflow:scroll; overflow:scroll;">
+				<!-- TITULO -->
+				<div style="text-align:center; margin-top: 5px; display:block;"><h3>Imagens</h3></div>
+				<!-- /TITULO -->
+				<!-- IMAGENS PEQUENAS -->
+				::imagem_pequena::
+				<!-- /IMAGENS PEQUENAS -->
+			</div>
+			<div style="height:100%; width:50%; float:left; text-align:center; display:block;">
+				<!-- IMAGEM GRANDE -->
+				::imagem_grande::
+				<!-- /IMAGEM GRANDE -->
+			</div>
+		</div>
+		<!-- /IMAGENS -->
+		
+		<!-- DOCUMENTOS -->
+		<div id="divDialogDocumentos" style="height:492px; position:relative; margin-top:-16px; display:block; display:none;">
+			<!-- TITULO -->
+			<div style="text-align:center; margin-top: 5px; display:block;"><h3>Documentos</h3></div>
+			<!-- /TITULO -->
+			<!-- LINKS DOCUMENTOS -->
+			::arquivos::
+			<!-- /LINKS DOCUMENTOS -->
+		</div>
+		<!-- /DOCUMENTOS -->
+	</div>
+	<div id="mask"></div>
+</div>

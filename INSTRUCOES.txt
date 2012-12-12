@@ -1,0 +1,6 @@
+﻿A aplicação foi desenvolvida para ser executada em desktop, portanto essa versão não está disponibilizada na internet para utilização. Porém pode ser executada através de qualquer desktop, basta ter instalado no mesmo o Software Python versão 3.2. e dentro da pasta 'Libs' onde está localizado os arquivos do software instalado copiar as pastas, 'Cherrypy' e ''bs4' que são as bibliotecas. 
+Será necessário também a cópia do projeto que contém todos os arquivos do projeto, tais como Web Crawler, o HTML, o arquivos onde possui as palavras-chaves da aplicação e as imagens utilizadas no desenvolvimento da aplicação, no disco local 'C:/', ficando como caminho absoluto do arquivo python para execução do servidor como 'C:/py/pi4/hython.py'.
+A partir desse momento podemos acessar a aplicação através do browser Chrome, com o seguinte endereço 'localhost:90', e acessar qualquer página na web utilizando a seguinte extensão 'http://www.endereço_site.com' ou 'http://www.endereço_site.com.br', para ser realizado a analise dos dados a serem visualizados.
+ 
+
+

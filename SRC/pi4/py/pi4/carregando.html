@@ -1,0 +1,72 @@
+<title>Hython - Carregando...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+    $(document).ready(function(){
+		$("#divSnake").fadeIn(2000);
+        $("#divLogotipo").fadeIn(2000);
+		$("#divCarregando").fadeIn(2000, function(){
+			var site = $('#hdnTxtPesquisa').val();
+			$.ajax({
+				url: 'inicio',
+				data: { hdnTxtPesquisa: site },
+				success: function(data) {
+					if(data == "0")
+					{
+						$('form#frmErro #hdnTxtSite').val(site);
+						$("#divSnake").fadeOut(2000);
+						$("#divLogotipo").fadeOut(2000);
+						$("#divCarregando").fadeOut(2000, function(){
+							$('#frmErro').submit();
+						});
+					}
+					else
+					{
+						var retorno = data.split("|");
+						var links_internos = retorno[5];
+						var links_externos = retorno[6];
+						$('form#frmResultado #hdnTxtSite').val(encodeURI(retorno[0]));
+						$('form#frmResultado #hdnTxtInicio').val(encodeURI(retorno[1]));
+						$('form#frmResultado #hdnTxtFim').val(encodeURI(retorno[2]));
+						$('form#frmResultado #hdnTxtTipoCategorizacao').val(encodeURI(retorno[3]));
+						$('form#frmResultado #hdnTxtCategoria').val(encodeURI(retorno[4]));
+						$('form#frmResultado #hdnTxtLinksInternos').val(encodeURI(links_internos));
+						$('form#frmResultado #hdnTxtLinksExternos').val(encodeURI(links_externos));
+						$('form#frmResultado #hdnTxtCaminhoImagens').val(encodeURI(retorno[7]));
+						$('form#frmResultado #hdnTxtCaminhoArquivos').val(encodeURI(retorno[8]));
+						$('form#frmResultado #hdnTxtPalavras').val(encodeURI(retorno[9]));
+						$("#divLogotipo").fadeOut(2000);
+						$("#divCarregando").fadeOut(2000, function(){
+							$('#frmResultado').submit();
+						});
+					}
+				}
+			});
+		});
+    });
+	
+</script>
+<input type="hidden" id="hdnTxtPesquisa" value="::site::"/>
+<div style="text-align: center;">
+	<div id="divLogotipo" style="display: none;">
+		<img src="imagens/carregando.png" style="height: 186px; width: 475px;">
+	</div>
+	<div id="divCarregando" style="display: none; margin-top: 15px">
+		Aguarde enquanto o site &eacute; analisado...
+	</div>
+</div>
+<form id="frmResultado" method="post" action="resultado">
+	<input type="hidden" id="hdnTxtSite" name="hdnTxtSite" value=""/>
+	<input type="hidden" id="hdnTxtInicio" name="hdnTxtInicio" value=""/>
+	<input type="hidden" id="hdnTxtFim" name="hdnTxtFim" value=""/>
+	<input type="hidden" id="hdnTxtTipoCategorizacao" name="hdnTxtTipoCategorizacao" value=""/>
+	<input type="hidden" id="hdnTxtCategoria" name="hdnTxtCategoria" value=""/>
+	<input type="hidden" id="hdnTxtLinksInternos" name="hdnTxtLinksInternos" value=""/>
+	<input type="hidden" id="hdnTxtLinksExternos" name="hdnTxtLinksExternos" value=""/>
+	<input type="hidden" id="hdnTxtCaminhoImagens" name="hdnTxtCaminhoImagens" value=""/>
+	<input type="hidden" id="hdnTxtCaminhoArquivos" name="hdnTxtCaminhoArquivos" value=""/>
+	<input type="hidden" id="hdnTxtPalavras" name="hdnTxtPalavras" value=""/>
+</form>
+<form id="frmErro" method="post" action="erro">
+	<input type="hidden" id="hdnTxtSite" name="hdnTxtSite" value=""/>
+</form>
